@@ -66,8 +66,18 @@ public final class Formatter {
      * @param codePlat représentation des plats
      */
     public static String clientLine(Client client, MenuPlat codePlat) {
-        // TODO: à implémenter
-        return null;
+        // "    #1 Alice 🙂 (pat=4, 🍕)"
+        String platInfo = "";
+        if (codePlat != null) {
+            platInfo = ", " + emojiPlat(codePlat);
+        }
+        return String.format("\t#%d %s %s (pat=%d%s)",
+                client.getId(),
+                client.getNom(),
+                emojiEtatClient(client.getEtat()),
+                client.getPatience(),
+                platInfo
+        );
     }
 
     // ---------- Lignes événements ---------- //

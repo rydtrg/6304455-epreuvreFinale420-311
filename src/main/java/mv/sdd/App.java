@@ -27,7 +27,7 @@ public class App {
         String actionsFile = args[0];
         String outputFile = args[1];
 
-        try (PrintWriter out = new PrintWriter(new FileWriter(outputFile, false))) {
+        try (PrintWriter out = new PrintWriter(outputFile, "UTF-8")) {
 
             Logger logger = new Logger(out , true /* pour voir aussi en console ce qui serait écrit dans le fichier */);
             logger.logLine(Constantes.HEADER_APP);

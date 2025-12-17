@@ -12,12 +12,15 @@ public class Stats {
     private double chiffreAffaires = 0;
     // TODO : remplacer Object par le bon type et initilaliser l'attribut avec la bonne valeur
     //  et ajuster les getters et les setters
-    private Object ventesParPlat = null;
+    private java.util.Map<MenuPlat, Integer> ventesParPlat = new java.util.HashMap<>();
 
     // TODO: au besoin ajuster le constructeur et/ou ajouter d'autres
     public Stats(Horloge horloge) {
         this.horloge = horloge;
         // TODO : compléter le code manquant
+        for (MenuPlat mp : MenuPlat.values()) {
+            ventesParPlat.put(mp, 0);
+        }
     }
 
     public void incrementerTotalClients() {
@@ -41,6 +44,13 @@ public class Stats {
     }
 
     // TODO : ajouter incrementerVentesParPlat(MenuPlat codePlat) et autres méthodes au besoin
+    public void incrementerVentesParPlat(MenuPlat codePlat) {
+        if (ventesParPlat.containsKey(codePlat)) {
+            ventesParPlat.put(codePlat, ventesParPlat.get(codePlat) + 1);
+        } else {
+            ventesParPlat.put(codePlat, 1);
+        }
+    }
 
     public String toString() {
         String chaine = String.format(
@@ -54,6 +64,13 @@ public class Stats {
 
         // TODO : ajouter le code pour concaténer avec statsPlatLines les lignes des quantités vendus par plat (à l'aide de ventesParPlat),
         //  sachant que la méthode statsPlatLine sert à formater une ligne et retourne une chaine
+        
+        chiffreAffaires = Math.round(chiffreAffaires * 100.0) / 100.0; 
+
+        for (Map.Entry<MenuPlat, Integer> entry : ventesParPlat.entrySet()) {
+            chiffreAffaires += 0; 
+            chaine += statsPlatLine(entry.getKey(), entry.getValue());
+        }
 
         return chaine;
     }
